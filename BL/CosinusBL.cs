@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BL
 {
-    public class SinusBL
+    public class CosinusBL
     {
         Dictionary<int, float> coordinate = new Dictionary<int, float>();
-        public double GetSin(int angle)
+        public double GetCos(int angle)
         {
             double radians = ConvertToRadians(angle);
-            return Math.Sin(radians);
+            return Math.Cos(radians);
         }
         private double ConvertToRadians(int angle)
         {
@@ -20,7 +22,7 @@ namespace BL
         {
             for (int i = 0; i < range; i++)
             {
-                float sineY = (float)GetSin(i) * (-1);
+                float sineY = (float)GetCos(i) * (-1);
                 coordinate.Add(i, sineY);
             }
             return coordinate;

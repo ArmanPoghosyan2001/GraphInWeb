@@ -14,6 +14,8 @@ namespace FirstTask.Controllers
     public class HomeController : Controller
     {
         private SinusBL sinusBL = new SinusBL();
+        private CosinusBL cosinusBL = new CosinusBL();
+
         public IActionResult Index()
         {
             return View();
@@ -21,9 +23,13 @@ namespace FirstTask.Controllers
 
         public JsonResult Sinus(int range = 1000)
         {
-            Dictionary<int, float> sinePoints = sinusBL.CalculatePoints(range); 
+            Dictionary<int, float> sinePoints = sinusBL.CalculatePoints(range);
             return Json(sinePoints);
-            //return View(sinePoints);
+        }
+        public JsonResult Cosinus(int range = 1000)
+        {
+            Dictionary<int, float> cosinePoints = cosinusBL.CalculatePoints(range);
+            return Json(cosinePoints);
         }
     }
 }

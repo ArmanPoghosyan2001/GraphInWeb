@@ -3,14 +3,13 @@
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
-    <button type="button" id="click-me">sss</button>
+    <button type="button" id="sin">Sinus</button>
+    <button type="button" id="cosine">Cosinus</button>
 
     <canvas id="myChart" style="width:100%;max-width:100%"></canvas>
     <script type="text/javascript">
-        document.getElementById('click-me').onclick = function(ev){
+        document.getElementById('sin').onclick = function (ev) {
             console.log(ev);
             fetch("https://localhost:44353/home/Sinus")
                 .then(response => response.json())
@@ -42,6 +41,39 @@
                         }
                     });
                 });
-            }
+        }
+        document.getElementById('cosine').onclick = function (ev) {
+            console.log(ev);
+            fetch("https://localhost:44353/home/Cosinus")
+                .then(response => response.json())
+                .then(data => {
+                    var xValues = [];
+                    var yValues = [];
+                    for (const key in data) {
+                        xValues.push(key)
+                        yValues.push(data[key])
+                    }
+                    new Chart("myChart", {
+                        type: "line",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                fill: false,
+                                pointRadius: 3,
+                                borderColor: "rgba(0,255,0,0.5)",
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: "y=Cosinus(x)",
+                                fontSize: 16
+                            }
+                        }
+                    });
+                });
+        }
     </script>
 </div>
